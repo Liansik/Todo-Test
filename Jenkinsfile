@@ -4,14 +4,22 @@ pipeline {
     
     stages {
         
-       stage('Checkout Codebase'){
+        stage("Parametrs Set") {
+            steps{
+                script {
+                    parameters: [choice(name: 'Branch', choices: 'main\ndev', description: 'Choose branch to build')]
+                }
+            }
+            
+        }
+        
+        stage('Clean WorkSpace and CheckOut'){
             steps{
                 cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/dev']],userRemoteConfigs:
+                checkout scm: [$class: 'GitSCM', branches: [[name: '*/${Branch}']],userRemoteConfigs:
                 [[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]]
             }
         }
-        
         
         stage("build") {
             steps {
@@ -33,12 +41,7 @@ pipeline {
     }
     post {
          always{
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
+            echo 'test'
         }
     }
 }
