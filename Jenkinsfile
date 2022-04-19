@@ -6,6 +6,7 @@ pipeline {
 
         stage("build") {
             steps {
+                cleanWs()
                 checkout dev
                 withEnv(["PATH+NODE=${tool name: 'Node', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 bat "npm install"
@@ -24,7 +25,12 @@ pipeline {
     }
     post {
         always{
-            echo 'test'
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
 }
