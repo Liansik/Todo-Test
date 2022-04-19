@@ -3,12 +3,6 @@ pipeline {
     agent  any
     
     stages {
-        stage('Checkout Codebase'){
-            steps{
-                checkout scm: [branches: [[name: '*/dev']]]
-            }
-        }
-
         stage("build") {
             steps {
                 withEnv(["PATH+NODE=${tool name: 'Node', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
