@@ -2,9 +2,13 @@ pipeline {
 
     agent  any
     parameters {
-        gitParameter name: 'TAG',
-                     type: 'PT_TAG',
-                     defaultValue: 'main'
+        listGitBranches(
+            branchFilter: 'origin.*/(.*)',
+            defaultValue: 'default',
+            name: 'Branch',
+            type: 'BRANCH',
+            remoteURL: 'https://github.com/Liansik/Todo-Test',
+            credentialsId: 'GitRep')
     }
     stages {
     
@@ -12,7 +16,7 @@ pipeline {
             steps{
                 cleanWs()
                 checkout([$class: 'GitSCM',
-                          branches: [[name: "${params.TAG}"]],
+                          branches: [[name: "${Branch}"]],
                           doGenerateSubmoduleConfigurations: false,
                           extensions: [],
                           gitTool: 'Default',
