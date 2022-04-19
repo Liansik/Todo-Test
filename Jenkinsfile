@@ -1,16 +1,10 @@
 pipeline {
 
     agent  any
-    
+    parameters: [choice(name: 'Branch', choices: 'main\ndev', description: 'Choose branch to build')]
     stages {
         
-        stage("Parametrs Set") {
-            steps{
-                script{
-                    parameters: [choice(name: 'Branch', choices: 'main\ndev', description: 'Choose branch to build')]
-                }   
-            }   
-        }
+
         
         stage('Clean WorkSpace and CheckOut'){
             steps{
