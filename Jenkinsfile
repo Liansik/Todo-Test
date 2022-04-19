@@ -6,7 +6,7 @@ pipeline {
 
         stage("build") {
             steps {
-                env.CHANGE_BRANCH == "dev"
+                GIT_BRANCH "dev"
                 withEnv(["PATH+NODE=${tool name: 'Node', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 bat "npm install"
                 bat "npm run start"
