@@ -6,7 +6,6 @@ pipeline {
 
         stage("build") {
             steps {
-                cleanWs()
                 withEnv(["PATH+NODE=${tool name: 'Node', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 bat "npm install"
                 bat "npm run start"
