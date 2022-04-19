@@ -17,6 +17,7 @@ pipeline {
             steps {
                 withEnv(["PATH+NODE=${tool name: 'Node', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'}/bin"]) {
                 bat "npm run test"
+                junit "results-Junit1.xml"
                 }
             }
         }
