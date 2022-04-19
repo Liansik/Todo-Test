@@ -132,7 +132,7 @@ exports.config = {
         'dot',
         ['junit', {
             outputDir: './',
-            outputFileFormat: outputFileFormat: () => `results-Junit1.xml`
+            outputFileFormat:() => `results-Junit1.xml`
         }]
     ],
 
