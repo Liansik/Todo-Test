@@ -2,15 +2,23 @@ pipeline {
 
     agent  any
     parameters {
-        gitParameter branchFilter: 'refs/heads/(.*)', defaultValue: 'main', name: 'branch', type: 'PT_BRANCH'
+        gitParameter name: 'TAG',
+                     type: 'PT_TAG',
+                     defaultValue: 'main'
     }
     stages {
     
         stage('Clean WorkSpace and CheckOut'){
             steps{
                 cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/${branch}']],userRemoteConfigs:
-                [[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]]
+                checkout([$class: 'GitSCM',
+                          branches: [[name: "${params.TAG}"]],
+                          doGenerateSubmoduleConfigurations: false,
+                          extensions: [],
+                          gitTool: 'Default',
+                          submoduleCfg: [],
+                          userRemoteConfigs:[[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]
+                          ])
             }
         }
         
