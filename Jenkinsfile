@@ -3,7 +3,7 @@ pipeline {
     agent  any
     parameters {
         listGitBranches(
-            branchFilter: 'origin.*/(.*)',
+            branchFilter: 'tree.*/(.*)',
             defaultValue: 'default',
             name: 'Branch',
             type: 'BRANCH',
