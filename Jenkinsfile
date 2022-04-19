@@ -1,17 +1,9 @@
 pipeline {
 
     agent  any
+    parameters {choice(name: 'Branch', choices: 'main\ndev', description: 'Choose branch to build!')}
     stages {
-        
-        stage('Set Parameters'){
-            steps{
-                script { 
-                    def a = 1
-                }
-            }
-        }
-        
-        
+    
         stage('Clean WorkSpace and CheckOut'){
             steps{
                 cleanWs()
