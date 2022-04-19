@@ -3,7 +3,7 @@ pipeline {
     agent  any
     stages {
         
-        stage('Clean WorkSpace and CheckOut'){
+        stage('Set Parameters'){
             steps{
                 script { 
                     def a = 1
