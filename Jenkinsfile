@@ -5,7 +5,6 @@ pipeline {
     stages {
         stage('Checkout Codebase'){
             steps{
-                cleanWs()
                 checkout scm: [branches: [[name: '*/dev']],userRemoteConfigs:
                 [[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]]
             }
