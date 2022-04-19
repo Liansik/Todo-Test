@@ -1,13 +1,15 @@
 pipeline {
 
     agent  any
-    parameters {choice(name: 'Branch', choices: 'main\ndev', description: 'Choose branch to build!')}
+    parameters {
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
+    }
     stages {
     
         stage('Clean WorkSpace and CheckOut'){
             steps{
                 cleanWs()
-                checkout scm: [$class: 'GitSCM', branches: [[name: '*/${Branch}']],userRemoteConfigs:
+                checkout scm: [$class: 'GitSCM', branches: [[name: '*/${BRANCH}']],userRemoteConfigs:
                 [[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]]
             }
         }
