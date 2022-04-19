@@ -9,7 +9,8 @@ pipeline {
         stage('Clean WorkSpace and CheckOut'){
             steps{
                 cleanWs()
-                git branch: "${params.branch}", url 'https://github.com/Liansik/Todo-Test'
+                checkout scm: [$class: 'GitSCM', branches: [[name: '*/${branch}']],userRemoteConfigs:
+                [[credentialsId: 'GitRep', url: 'https://github.com/Liansik/Todo-Test']]]
             }
         }
         
