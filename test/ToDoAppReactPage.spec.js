@@ -1,6 +1,4 @@
-import { logStep, logTestName} from "../core/logger";  
-import { ToDoAppReact } from "../pages"; 
-const { expect } = require("chai");
+
 
 let text = 'text'
 
