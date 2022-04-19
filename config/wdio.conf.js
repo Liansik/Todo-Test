@@ -131,7 +131,10 @@ exports.config = {
     reporters: [
         'dot',
         ['junit', {
-            outputDir: './'
+            outputDir: './',
+            outputFileFormat: function(options) { // optional
+                return `results-${options.cid}.${options.capabilities}.xml`
+            }
         }]
     ],
 
