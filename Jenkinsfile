@@ -46,7 +46,7 @@ pipeline {
     }
     post {
          always{
-            echo 'test'
+            emailext body: 'Test 2', subject: 'Test 1 ', to: 'kirnichnyilya@gmail.com'
         }
     }
 }
